@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ফলাফল - লালমনিরহাট নেছারিয়া কামিল মাদ্রাসা</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- Header একই রাখো - index.html থেকে কপি করো -->
+<header class="header no-print">
+  <div class="container"><div class="header-top">
+      <svg class="logo" viewBox="0 0 100 100" fill="none"><path d="M50 10 C30 10, 15 25, 15 45 L15 70 C15 85, 30 95, 50 95 C70 95, 85 85, 85 70 L85 45 C85 25, 70 10, 50 10 Z" fill="#2e7d32"/><circle cx="50" cy="40" r="8" fill="#fff"/><rect x="46" y="48" width="8" height="20" fill="#fff"/><path d="M35 70 L50 60 L65 70" stroke="#fff" stroke-width="3" fill="none"/></svg>
+      <h1 class="school-name">লালমনিরহাট নেছারিয়া কামিল মাদ্রাসা<br>নূরানী শাখা</h1>
+  </div></div>
+  <nav class="nav"><div class="container"><ul class="nav-menu">
+        <li><a href="index.html">হোম</a></li>
+        <li><a href="notice.html">নোটিশ</a></li>
+        <li><a href="routine.html">রুটিন</a></li>
+        <li><a href="syllabus.html">সিলেবাস</a></li>
+        <li><a href="paramarsha.html">পরামর্শ</a></li>
+        <li><a href="result.html" class="active">ফলাফল</a></li>
+        <li><a href="library.html">লাইব্রেরি</a></li>
+        <li><a href="login.html">লগইন</a></li>
+  </ul></div></nav>
+</header>
+
+<main class="container">
+  <section class="section">
+    <div class="section-header">ফলাফল</div>
+    <div class="card no-print">
+      <div class="form-group">
+        <label>শ্রেণী নির্বাচন</label>
+        <select id="resultClass">
+          <option value="">নির্বাচন করুন</option>
+          <option value="শিশু শ্রেণী">শিশু শ্রেণী</option>
+          <option value="প্রথম শ্রেণী">প্রথম শ্রেণী</option>
+          <option value="দ্বিতীয় শ্রেণী">দ্বিতীয় শ্রেণী</option>
+          <option value="তৃতীয় শ্রেণী">তৃতীয় শ্রেণী</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>শিক্ষাবর্ষ</label>
+        <select id="resultYear">
+          <option value="">নির্বাচন করুন</option>
+          <option value="2026">২০২৬</option>
+          <option value="2027">২০২৭</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>পরীক্ষার নাম</label>
+        <select id="examName">
+          <option value="">নির্বাচন করুন</option>
+          <option value="মাসিক পরীক্ষা">মাসিক পরীক্ষা</option>
+          <option value="১ম সাময়িক পরীক্ষা">১ম সাময়িক পরীক্ষা</option>
+          <option value="২য় সাময়িক পরীক্ষা">২য় সাময়িক পরীক্ষা</option>
+          <option value="বার্ষিক পরীক্ষা">বার্ষিক পরীক্ষা</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>রোল নম্বর</label>
+        <input type="number" id="rollNumber" placeholder="রোল লিখুন">
+      </div>
+      <button class="btn btn-block" onclick="showResult()">ফলাফল দেখুন</button>
+      <button class="btn btn-orange btn-block" onclick="resetResult()">রিসেট</button>
+    </div>
+    <div id="resultDisplay" class="hidden"></div>
+  </section>
+</main>
+
+<footer class="no-print"><p>© ২০২৬ লালমনিরহাট নেছারিয়া কামিল মাদ্রাসা নূরানী শাখা</p></footer>
+
+<script>
+const RESULT_API_URL = "https://api.sheetbest.com/sheets/তোমার-API-ID"; // ⚠️ এটা চেঞ্জ করতে হবে
+
+async function showResult() {
+  const cls = document.getElementById('resultClass').value;
+  const year = document.getElementById('resultYear').value;
+  const exam = document.getElementById('examName').value;
+  const roll = document.getElementById('rollNumber').value;
+  if (!cls ||!year ||!exam ||!roll) return alert('সব তথ্য দিন');
+
+  const resultDiv = document.getElementById('resultDisplay');
+  resultDiv.innerHTML = '<div class="card text-center">লোড হচ্ছে...</div>';
+  resultDiv.classList.remove('hidden');
+
+  try {
+    const response = await fetch(`${RESULT_API_URL}/search?রোল=${roll}&শ্রেণী=${cls}&সাল=${year}&পরীক্ষা=${exam}`);
+    const data = await response.json();
+
+    if(data.length === 0) {
+      resultDiv.innerHTML = `<div class="card text-center"><h3 style="color:red;">দুঃখিত!</h3><p>রোল ${roll} এর তথ্য পাওয়া যায়নি।</p></div>`;
+      return;
+    }
+
+    const s = data[0];
+    let tableRows = '';
+    const subjects = ['কোরআন মাজীদ ও তাজবীদ','কালিমা ও মাসায়েল','হাদিস শরীফ ও আসমাউল হুসনা','আদঃ মাসনুনাহ ও আদঃ সলাত','আরবি লেখা','ভূগোল সমাজ','বাংলা','ইংরেজি','গণিত','ইসলাম শিক্ষা'];
+    subjects.forEach(sub => { if(s[sub]) tableRows += `<tr><td style="padding:8px;border:1px solid #ddd;">${sub}</td><td style="padding:8px;border:1px solid #ddd;text-align:center;">${s[sub]}</td></tr>`; });
+
+    resultDiv.innerHTML = `
+      <div class="card">
+        <h3 style="text-align:center; color:var(--primary-green);">মার্কশিট - ${s.পরীক্ষা} ${s.সাল}</h3>
+        <p><b>নাম:</b> ${s.নাম}</p><p><b>রোল:</b> ${s.রোল}</p><p><b>শ্রেণী:</b> ${s.শ্রেণী}</p>
+        <table style="width:100%; margin:16px 0; border-collapse:collapse;">
+          <tr style="background:#f5f5f5;"><th style="padding:8px;border:1px solid #ddd;">বিষয়</th><th style="padding:8px;border:1px solid #ddd;">নম্বর</th></tr>
+          ${tableRows}
+          <tr style="background:#e8f5e9;font-weight:700;"><td style="padding:8px;border:1px solid #ddd;">মোট</td><td style="padding:8px;border:1px solid #ddd;text-align:center;">${s.মোট}</td></tr>
+        </table>
+        <button class="btn btn-blue btn-block no-print" onclick="window.print()">⬇ মার্কশিট PDF ডাউনলোড / প্রিন্ট</button>
+      </div>`;
+  } catch (error) {
+    resultDiv.innerHTML = '<div class="card text-center" style="color:red;">সার্ভার এরর! API লিংক চেক করুন।</div>';
+  }
+}
+function resetResult() {
+  document.getElementById('resultClass').value = '';
+  document.getElementById('resultYear').value = '';
+  document.getElementById('examName').value = '';
+  document.getElementById('rollNumber').value = '';
+  document.getElementById('resultDisplay').classList.add('hidden');
+}
+</script>
+</body>
+</html>

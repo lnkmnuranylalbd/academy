@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>রুটিন - লালমনিরহাট নেছারিয়া কামিল মাদ্রাসা</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="header no-print">
+  <div class="container"><div class="header-top">
+      <svg class="logo" viewBox="0 0 100 100" fill="none"><path d="M50 10 C30 10, 15 25, 15 45 L15 70 C15 85, 30 95, 50 95 C70 95, 85 85, 85 70 L85 45 C85 25, 70 10, 50 10 Z" fill="#2e7d32"/><circle cx="50" cy="40" r="8" fill="#fff"/><rect x="46" y="48" width="8" height="20" fill="#fff"/><path d="M35 70 L50 60 L65 70" stroke="#fff" stroke-width="3" fill="none"/></svg>
+      <h1 class="school-name">লালমনিরহাট নেছারিয়া কামিল মাদ্রাসা<br>নূরানী শাখা</h1>
+  </div></div>
+  <nav class="nav"><div class="container"><ul class="nav-menu">
+        <li><a href="index.html">হোম</a></li>
+        <li><a href="notice.html">নোটিশ</a></li>
+        <li><a href="routine.html" class="active">রুটিন</a></li>
+        <li><a href="syllabus.html">সিলেবাস</a></li>
+        <li><a href="paramarsha.html">পরামর্শ</a></li>
+        <li><a href="result.html">ফলাফল</a></li>
+        <li><a href="library.html">লাইব্রেরি</a></li>
+        <li><a href="login.html">লগইন</a></li>
+  </ul></div></nav>
+</header>
+
+<main class="container">
+  <section class="section">
+    <div class="section-header">রুটিন</div>
+    <button class="btn btn-block" onclick="showRoutine('exam')">📅 পরীক্ষার রুটিন</button>
+    <button class="btn btn-block" onclick="showRoutine('class')">📚 ক্লাস রুটিন</button>
+    
+    <div id="examRoutine" class="hidden mt-2">
+      <div class="card">
+        <h3 style="text-align:center; margin-bottom:16px;">পরীক্ষার রুটিন - ২০২৬</h3>
+        <div class="list-item"><span>মাসিক পরীক্ষা - জানুয়ারি</span><a href="#" class="btn btn-blue" style="padding:6px 12px; font-size:14px;">দেখুন</a></div>
+        <div class="list-item"><span>১ম সাময়িক পরীক্ষা - এপ্রিল</span><a href="#" class="btn btn-blue" style="padding:6px 12px; font-size:14px;">দেখুন</a></div>
+        <div class="list-item"><span>২য় সাময়িক পরীক্ষা - আগস্ট</span><a href="#" class="btn btn-blue" style="padding:6px 12px; font-size:14px;">দেখুন</a></div>
+        <div class="list-item"><span>বার্ষিক পরীক্ষা - ডিসেম্বর</span><a href="#" class="btn btn-blue" style="padding:6px 12px; font-size:14px;">দেখুন</a></div>
+        <button class="btn btn-gray btn-block mt-2" onclick="hideRoutine()">← পিছনে যান</button>
+      </div>
+    </div>
+
+    <div id="classRoutine" class="hidden mt-2">
+      <div class="card">
+        <h3 style="text-align:center; margin-bottom:16px;">ক্লাস রুটিন - সপ্তাহে ৬ দিন</h3>
+        <div class="list-item"><span>শনিবার</span><a href="#" class="btn btn-blue" style="padding:6px 12px; font-size:14px;">দেখুন</a></div>
+        <div class="list-item"><span>রবিবার</span><a href="#" class="btn btn-blue" style="padding:6px 12px; font-size:14px;">দেখুন</a></div>
+        <div class="list-item"><span>সোমবার</span><a href="#" class="btn btn-blue" style="padding:6px 12px; font-size:14px;">দেখুন</a></div>
+        <div class="list-item"><span>মঙ্গলবার</span><a href="#" class="btn btn-blue" style="padding:6px 12px; font-size:14px;">দেখুন</a></div>
+        <div class="list-item"><span>বুধবার</span><a href="#" class="btn btn-blue" style="padding:6px 12px; font-size:14px;">দেখুন</a></div>
+        <div class="list-item"><span>বৃহস্পতিবার</span><a href="#" class="btn btn-blue" style="padding:6px 12px; font-size:14px;">দেখুন</a></div>
+        <button class="btn btn-gray btn-block mt-2" onclick="hideRoutine()">← পিছনে যান</button>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="no-print"><p>© ২০২৬ লালমনিরহাট নেছারিয়া কামিল মাদ্রাসা নূরানী শাখা</p></footer>
+<script>
+function showRoutine(type) {
+  document.getElementById('examRoutine').classList.add('hidden');
+  document.getElementById('classRoutine').classList.add('hidden');
+  document.getElementById(type + 'Routine').classList.remove('hidden');
+}
+function hideRoutine() {
+  document.getElementById('examRoutine').classList.add('hidden');
+  document.getElementById('classRoutine').classList.add('hidden');
+}
+</script>
+</body>
+</html>

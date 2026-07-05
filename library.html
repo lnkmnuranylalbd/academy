@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>লাইব্রেরি - লালমনিরহাট নেছারিয়া কামিল মাদ্রাসা</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.search-box {width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 25px; margin-bottom: 16px; font-size: 16px;}
+.filter-btns {display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;}
+.filter-btn {padding: 8px 16px; border: 2px solid var(--primary-green); background: white; color: var(--primary-green); border-radius: 20px; cursor: pointer;}
+.filter-btn.active {background: var(--primary-green); color: white;}
+.book-card {text-align: center;}
+.book-title {font-weight: 700; margin: 8px 0 4px;}
+.book-author {color: #666; font-size: 14px; margin-bottom: 12px;}
+</style>
+</head>
+<body>
+<header class="header no-print">
+  <div class="container"><div class="header-top">
+      <svg class="logo" viewBox="0 0 100 100" fill="none"><path d="M50 10 C30 10, 15 25, 15 45 L15 70 C15 85, 30 95, 50 95 C70 95, 85 85, 85 70 L85 45 C85 25, 70 10, 50 10 Z" fill="#2e7d32"/><circle cx="50" cy="40" r="8" fill="#fff"/><rect x="46" y="48" width="8" height="20" fill="#fff"/><path d="M35 70 L50 60 L65 70" stroke="#fff" stroke-width="3" fill="none"/></svg>
+      <h1 class="school-name">লালমনিরহাট নেছারিয়া কামিল মাদ্রাসা<br>নূরানী শাখা</h1>
+  </div></div>
+  <nav class="nav"><div class="container"><ul class="nav-menu">
+        <li><a href="index.html">হোম</a></li>
+        <li><a href="notice.html">নোটিশ</a></li>
+        <li><a href="routine.html">রুটিন</a></li>
+        <li><a href="syllabus.html">সিলেবাস</a></li>
+        <li><a href="paramarsha.html">পরামর্শ</a></li>
+        <li><a href="result.html">ফলাফল</a></li>
+        <li><a href="library.html" class="active">লাইব্রেরি</a></li>
+        <li><a href="login.html">লগইন</a></li>
+  </ul></div></nav>
+</header>
+
+<main class="container">
+  <section class="section">
+    <div class="section-header">লাইব্রেরি</div>
+    <input type="text" class="search-box" id="bookSearch" placeholder="বই খুঁজুন..." onkeyup="filterBooks()">
+    <div class="filter-btns">
+      <button class="filter-btn active" onclick="filterCategory('all', this)">সব</button>
+      <button class="filter-btn" onclick="filterCategory('quran', this)">কোরআন</button>
+      <button class="filter-btn" onclick="filterCategory('hadis', this)">হাদিস</button>
+      <button class="filter-btn" onclick="filterCategory('fiqh', this)">ফিকহ</button>
+      <button class="filter-btn" onclick="filterCategory('story', this)">গল্প</button>
+    </div>
+    <div id="bookGrid" class="grid grid-2 grid-3"></div>
+  </section>
+</main>
+<footer class="no-print"><p>© ২০২৬ লালমনিরহাট নেছারিয়া কামিল মাদ্রাসা নূরানী শাখা</p></footer>
+<script>
+let demoBooks = [
+  {title: 'কোরআন মাজীদ', author: 'ইসলামিক ফাউন্ডেশন', category: 'quran', link:'#'},
+  {title: 'বুখারী শরীফ ১ম খণ্ড', author: 'ইমাম বুখারী', category: 'hadis', link:'#'},
+  {title: 'ফিকহুল আকবার', author: 'ইমাম আবু হানিফা', category: 'fiqh', link:'#'},
+  {title: 'আদর্শ মুসলিম শিশু', author: 'ড. মুস্তফা', category: 'story', link:'#'},
+  {title: 'ছোটদের ইসলামিক গল্প', author: 'নজরুল ইসলাম', category: 'story', link:'#'}
+];
+function loadBooks() {
+  const html = demoBooks.map(b => `
+    <div class="card book-card" data-category="${b.category}">
+      <div style="font-size:48px;">📚</div>
+      <div class="book-title">${b.title}</div>
+      <div class="book-author">লেখক: ${b.author}</div>
+      <a href="${b.link}" class="btn btn-block" target="_blank">⬇ ডাউনলোড / পড়ুন</a>
+    </div>
+  `).join('');
+  document.getElementById('bookGrid').innerHTML = html;
+}
+function filterBooks() {
+  const search = document.getElementById('bookSearch').value.toLowerCase();
+  document.querySelectorAll('.book-card').forEach(card => {
+    const title = card.querySelector('.book-title').textContent.toLowerCase();
+    card.style.display = title.includes(search)? 'block' : 'none';
+  });
+}
+function filterCategory(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.book-card').forEach(card => {
+    if (cat === 'all' || card.dataset.category === cat) card.style.display = 'block';
+    else card.style.display = 'none';
+  });
+}
+loadBooks();
+</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>লগইন - লালমনিরহাট নেছারিয়া কামিল মাদ্রাসা</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="header no-print">
+  <div class="container"><div class="header-top">
+      <svg class="logo" viewBox="0 0 100 100" fill="none"><path d="M50 10 C30 10, 15 25, 15 45 L15 70 C15 85, 30 95, 50 95 C70 95, 85 85, 85 70 L85 45 C85 25, 70 10, 50 10 Z" fill="#2e7d32"/><circle cx="50" cy="40" r="8" fill="#fff"/><rect x="46" y="48" width="8" height="20" fill="#fff"/><path d="M35 70 L50 60 L65 70" stroke="#fff" stroke-width="3" fill="none"/></svg>
+      <h1 class="school-name">লালমনিরহাট নেছারিয়া কামিল মাদ্রাসা<br>নূরানী শাখা</h1>
+  </div></div>
+  <nav class="nav"><div class="container"><ul class="nav-menu">
+        <li><a href="index.html">হোম</a></li>
+        <li><a href="notice.html">নোটিশ</a></li>
+        <li><a href="routine.html">রুটিন</a></li>
+        <li><a href="syllabus.html">সিলেবাস</a></li>
+        <li><a href="paramarsha.html">পরামর্শ</a></li>
+        <li><a href="result.html">ফলাফল</a></li>
+        <li><a href="library.html">লাইব্রেরি</a></li>
+        <li><a href="login.html" class="active">লগইন</a></li>
+  </ul></div></nav>
+</header>
+
+<main class="container">
+  <section class="section">
+    <div class="section-header">লগইন / রেজিস্ট্রেশন</div>
+    <div class="card" id="loginForm">
+      <div class="form-group">
+        <label>মোবাইল নাম্বার</label>
+        <input type="tel" id="loginMobile" placeholder="01xxxxxxxxx">
+      </div>
+      <div class="form-group">
+        <label>পাসওয়ার্ড</label>
+        <input type="password" id="loginPassword" placeholder="পাসওয়ার্ড দিন">
+      </div>
+      <button class="btn btn-block" onclick="login()">লগইন</button>
+      <p class="text-center mt-2">একাউন্ট নেই? <a href="#" onclick="showRegister()" style="color:var(--primary-green);font-weight:600;">রেজিস্ট্রেশন করুন</a></p>
+    </div>
+
+    <div class="card hidden" id="registerForm">
+      <div class="form-group"><label>নাম</label><input type="text" id="regName" placeholder="পূর্ণ নাম"></div>
+      <div class="form-group"><label>রোল</label><input type="number" id="regRoll" placeholder="রোল নম্বর"></div>
+      <div class="form-group">
+        <label>শ্রেণী</label>
+        <select id="regClass">
+          <option value="">নির্বাচন করুন</option>
+          <option value="শিশু শ্রেণী">শিশু শ্রেণী</option>
+          <option value="প্রথম শ্রেণী">প্রথম শ্রেণী</option>
+          <option value="দ্বিতীয় শ্রেণী">দ্বিতীয় শ্রেণী</option>
+          <option value="তৃতীয় শ্রেণী">তৃতীয় শ্রেণী</option>
+        </select>
+      </div>
+      <div class="form-group"><label>মোবাইল নাম্বার</label><input type="tel" id="regMobile" placeholder="01xxxxxxxxx"></div>
+      <div class="form-group"><label>পাসওয়ার্ড</label><input type="password" id="regPassword" placeholder="পাসওয়ার্ড দিন"></div>
+      <button class="btn btn-block" onclick="register()">রেজিস্ট্রেশন</button>
+      <p class="text-center mt-2">একাউন্ট আছে? <a href="#" onclick="showLogin()" style="color:var(--primary-green);font-weight:600;">লগইন করুন</a></p>
+    </div>
+  </section>
+</main>
+<footer class="no-print"><p>© ২০২৬ লালমনিরহাট নেছারিয়া কামিল মাদ্রাসা নূরানী শাখা</p></footer>
+<script>
+function showRegister() {
+  document.getElementById('loginForm').classList.add('hidden');
+  document.getElementById('registerForm').classList.remove('hidden');
+}
+function showLogin() {
+  document.getElementById('registerForm').classList.add('hidden');
+  document.getElementById('loginForm').classList.remove('hidden');
+}
+function register() {
+  alert('ডেমো: রেজিস্ট্রেশন সফল! এখন লগইন করুন।\n\nরিয়েল ডেটাবেজ কানেক্ট করতে Firebase লাগবে।');
+  showLogin();
+}
+function login() {
+  alert('ডেমো: লগইন সফল!\n\nরিয়েল সিস্টেমে এখানে Firebase Authentication বসবে।');
+}
+</script>
+</body>
+</html>
